@@ -32,6 +32,7 @@ Science Plots
 
 > **FORKED BRANCH NOTE**
 > : This is a fork that fixes the AttributeError `plt.style` has no attribute 'core'.
+
 > : This package with fixes can only be installed with `pip install <path/to/package>` 
 
 > **Warning**
