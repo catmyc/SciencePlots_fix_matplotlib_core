@@ -1,18 +1,28 @@
 """Test suite of SciencePlots
 """
 
+import importlib
+
 import matplotlib.pyplot as plt
+import scienceplots
 
 
 def test_matplotlib_required_api_existence():
     """Check if all functions and attributes used by scienceplots are available
     in matplotlib.
     """
-    assert hasattr(plt.style, "core")
-    assert hasattr(plt.style.core, "read_style_directory")
-    assert hasattr(plt.style.core, "update_nested_dict")
     assert hasattr(plt.style, "available")
     assert hasattr(plt.style, "library")
+
+
+def test_import_does_not_require_matplotlib_style_core(monkeypatch):
+    """SciencePlots can register its styles without Matplotlib's private API."""
+    monkeypatch.delattr(plt.style, "core", raising=False)
+
+    importlib.reload(scienceplots)
+
+    assert "science" in plt.style.available
+    assert "science" in plt.style.library
 
 
 def test_styles_existence(styles_in_scienceplots_per_folder):

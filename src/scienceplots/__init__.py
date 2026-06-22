@@ -12,7 +12,7 @@ styles_path = os.path.join(scienceplots_path, "styles")
 stylesheets = read_styles_in_folders(styles_path)
 
 # Update dictionary of styles - plt.style.library
-plt.style.core.update_nested_dict(plt.style.library, stylesheets)
-# Update `plt.style.available`, copy-paste from:
-# https://github.com/matplotlib/matplotlib/blob/a170539a421623bb2967a45a24bb7926e2feb542/lib/matplotlib/style/core.py#L266  # noqa: E501
-plt.style.core.available[:] = sorted(plt.style.library.keys())
+for name, style in stylesheets.items():
+    plt.style.library.setdefault(name, {}).update(style)
+
+plt.style.available[:] = sorted(plt.style.library.keys())

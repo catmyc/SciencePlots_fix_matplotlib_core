@@ -1,6 +1,6 @@
 import os
 
-import matplotlib.pyplot as plt
+import matplotlib as mpl
 
 
 def read_styles_in_folders(root_path):
@@ -20,7 +20,12 @@ def read_styles_in_folders(root_path):
         Should be compatible with matplotlib's plt.style.library dictionary.
     """
     stylesheets = {}  # plt.style.library is a dictionary
-    for folder, _, _ in os.walk(root_path):
-        new_stylesheets = plt.style.core.read_style_directory(folder)
-        stylesheets.update(new_stylesheets)
+    for folder, _, filenames in os.walk(root_path):
+        for filename in filenames:
+            if filename.endswith(".mplstyle"):
+                style_path = os.path.join(folder, filename)
+                style_name = os.path.splitext(filename)[0]
+                stylesheets[style_name] = mpl.rc_params_from_file(
+                    style_path, use_default_template=False
+                )
     return stylesheets
