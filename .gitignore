@@ -4,6 +4,7 @@ SciencePlots.egg-info/
 
 dist/
 dev/
+test/
 
 TODO.md
 new-version.md
