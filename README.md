@@ -30,6 +30,9 @@ Science Plots
     </table>
 </p>
 
+> **NOTE**
+> : This is a fork that fixes the AttributeError `plt.style` has no attribute 'core'. 
+
 > **Warning**
 > : As of version 2.0.0, you need to add `import scienceplots` before setting the style (`plt.style.use('science')`).
 
